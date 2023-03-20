@@ -7,10 +7,13 @@ import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+//HTTP 응답으로 사용할 DTO필요.
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
+//TodoDTO뿐만 아니라 이후의 다른 모델의 DTO도 ResponseDTO를 이용해 리턴 할수 있도록 제네릭 사용.
+
 public class ResponseDTO<T> {
     private String error;
     private List<T> data;
