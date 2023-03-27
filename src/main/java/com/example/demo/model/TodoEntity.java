@@ -20,8 +20,8 @@ import javax.persistence.Table;
 public class TodoEntity{
 
     @Id
-    @GeneratedValue(generator = "system-uuid")
-    @GenericGenerator(name="system-uuid",strategy="uuid")
+    @GeneratedValue(generator = "system-uuid") //ID 자동 생성 ,
+    @GenericGenerator(name="system-uuid",strategy="uuid") //
     private String id;
     private String userId;
     private String title;

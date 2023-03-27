@@ -23,4 +23,15 @@ public class TodoDTO {
         this.title=entity.getTitle();
         this.done = entity.isDone();
     }
+
+    public static TodoEntity toEntity(final TodoDTO dto)
+    {
+        return TodoEntity.builder().
+                id(dto.getId()).
+                title(dto.getTitle()).
+                done(dto.isDone()).
+                build();
+        //클라이언트에게 dto로 받아서 (controller)... Entity로 변환??
+
+    }
 }
