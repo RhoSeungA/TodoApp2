@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service // 내부에 @Component 어노테이션을 포함하고 있으며
@@ -47,14 +48,50 @@ public class TodoService {
     }
 
 
+    public List<TodoEntity> update(final TodoEntity entity)
+    {
+        validate(entity);
+
+        final Optional<TodoEntity> original =repository.findById(entity.getId());
+
+        original.ifPresent(todo->
+        {
+            todo.setTitle(entity.getTitle());
+            todo.setDone(entity.isDone());
+            repository.save(todo);
+        });
+
+        return retrieve(entity.getUserId());
+    }
+
+    public List<TodoEntity> delete(final TodoEntity entity)
+    {
+        validate(entity);
+
+        try{
+            repository.delete(entity);
+        }catch (Exception e){
+            log.error("error deleting entity",entity.getId(),e);
+            throw new RuntimeException("error deleting entity" + entity.getId());
+        }
+        return retrieve(entity.getUserId());
+
+    }
+
     public List<TodoEntity> retrieve(final String userId){
         return repository.findByUserId(userId);
     }
 
     private static void validate(TodoEntity entity) {
-        if(entity ==null){log.warn("entity cannot be null"); throw new RuntimeException("entity cannot be null");}
-        if(entity.getUserId()==null){log.warn("unknown user"); throw new RuntimeException("Unknown user");}
+        if(entity ==null){
+            log.warn("entity cannot be null");
+            throw new RuntimeException("entity cannot be null");}
+        if(entity.getUserId()==null){
+            log.warn("unknown user");
+            throw new RuntimeException("Unknown user");}
     }
+
+
 
 
 
