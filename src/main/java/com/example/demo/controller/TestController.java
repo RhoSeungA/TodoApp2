@@ -10,7 +10,7 @@ import java.util.List;
 
 //RestAPI 구현
 @RestController //http관련된 코드 및 요청/응답 매핑을 스프링이 알아서 해준다. /// JSON을 리턴하는 웹서비스임을 명시
-@RequestMapping("test")
+@RequestMapping("test") //리소스
 public class TestController {
     @GetMapping("/testGetMapping") //이 메서드의 리소스와 http메서드를 지정한다. /// path설정. get메서드 사용
     //클라이언트가 이 리소스에 대해 get메서드로 요청하면, @GetMapping에 연결된 컨트롤러가 실행.

@@ -32,6 +32,5 @@ public class TodoDTO {
                 done(dto.isDone()).
                 build();
         //클라이언트에게 dto로 받아서 (controller)... Entity로 변환??
-
     }
 }
